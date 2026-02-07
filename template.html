@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ info.name }} | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="scroll-indicator top">
+        <div class="scroll-line"></div>
+    </div>
+
+    <main>
+        <section id="hero">
+            <h1>{{ info.name }}</h1>
+            <p class="subtitle">{{ info.subtitle }}</p>
+            <p style="max-width: 500px; color: var(--text-dim); margin-bottom: 20px;">
+                {{ info.bio }}
+            </p>
+            <a href="federico_baggio_cv.pdf" class="btn" target="_blank">DOWNLOAD PDF CV</a>
+        </section>
+
+        <section id="skills">
+            <div class="section-header"><h2>SKILLS</h2></div>
+            <div class="card-grid">
+                {% for skill_group in skills %}
+                <div class="card">
+                    <p class="meta">{{ skill_group.category }}</p>
+                    <div class="tags">
+                        {% for tag in skill_group.tags %}
+                        <span>{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="section-header"><h2>EDUCATION</h2></div>
+            <div class="card-grid">
+                {% for edu in education %}
+                <div class="card">
+                    <p class="meta">{{ edu.date }}</p>
+                    <h3>{{ edu.degree }}</h3>
+                    <p class="role">{{ edu.school }}</p>
+                    <p>{{ edu.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="section-header"><h2>WORK EXPERIENCE</h2></div>
+            <div class="card-grid">
+                {% for job in experience %}
+                <div class="card">
+                    <p class="meta">{{ job.date }}</p>
+                    <h3>{{ job.company }}</h3>
+                    <p class="role">{{ job.role }}</p>
+                    <p>{{ job.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-header"><h2>PROJECTS</h2></div>
+            <div class="project-grid" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                {% for project in projects %}
+                <div class="card">
+                    <p class="meta">{{ project.meta }}</p>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="extra">
+            <div class="section-header"><h2>EXTRA & VOLUNTEERING</h2></div>
+            <div class="card-grid">
+                {% for item in extra %}
+                <div class="card">
+                    <p class="meta">{{ item.meta }}</p>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-header"><h2>CONTACT</h2></div>
+            <p>{{ info.email }}</p>
+            <p>{{ info.phone }}</p>
+            
+            <button id="emailBtn" class="btn" data-email="{{ info.email }}">
+                COPY EMAIL
+            </button>
+        </section>
+    </main>
+
+    <nav>
+        <ul>
+            <li><a href="#hero" class="active">HOME</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#education">EDU</a></li>
+            <li><a href="#experience">EXP</a></li>
+            <li><a href="#projects">WORK</a></li>
+            <li><a href="#extra">EXTRA</a></li>
+            <li><a href="#contact">MAIL</a></li>
+        </ul>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

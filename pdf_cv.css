@@ -1,0 +1,55 @@
+/* pdf_cv.css - FINAL FIXED VERSION */
+
+/* 1. FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #ff4d4d;
+    --text-black: #000000;
+    --text-dark: #222222;
+    --text-grey: #555555;
+}
+
+/* 2. PAGE SETUP - REAL MARGINS */
+/* We use real margins now (2.5cm) to guarantee space around text. */
+@page {
+    size: A4;
+    margin: 2.5cm 2.0cm; /* Top/Bottom: 2.5cm, Left/Right: 2.0cm */
+}
+
+/* 3. BACKGROUND RESET - CRITICAL STEP */
+/* We force the background to WHITE so it matches the white paper margin. */
+/* This eliminates the "grey box" effect you saw earlier. */
+html, body {
+    background-color: #ffffff !important; 
+    background: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-black);
+    font-size: 10pt;
+    line-height: 1.5;
+    margin: 0; /* Internal margin 0, page margin handles the rest */
+    padding: 0;
+}
+
+/* 4. LAYOUT RESET */
+* { box-sizing: border-box; }
+
+main, section, div, .card-grid, .card {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Hide web elements */
+nav, .scroll-indicator, .btn, #emailBtn { display: none !important; }
+
+/* 5. HERO / HEADER */
+#hero {
+    text-align: center;
+    margin-bottom: 40px !important;
+}

@@ -1,0 +1,350 @@
+:root {
+    --primary-color: #ff4d4d; /* Itomi-style bright red/coral accent */
+    --bg-main: #fcfaf7; /* Slightly warmer off-white background */
+    --text-main: #1a1a1a;
+    --text-dim: #666666;
+    --border-color: #e8e3df; /* Warmer border color */
+    --font-technical: 'Roboto Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    --transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-body);
+}
+
+/* --- Scroll Indicator (Left) --- */
+.scroll-indicator {
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.3s;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 100px;
+    background: var(--border-color);
+    position: relative;
+}
+
+/* Freccia SUPERIORE (Punta in alto) */
+.scroll-line::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid var(--primary-color);
+    border-top: 1px solid var(--primary-color);
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease;
+}
+
+/* Freccia INFERIORE (Punta in basso) */
+.scroll-line::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease;
+}
+
+/* STATO 1: TOP (Siamo in cima alla pagina) */
+/* Vogliamo scendere -> Nascondi freccia su, Mostra freccia giù */
+.scroll-indicator.top .scroll-line::before { opacity: 0; }
+.scroll-indicator.top .scroll-line::after  { opacity: 1; }
+
+/* STATO 2: MIDDLE (Siamo nel mezzo) */
+/* Possiamo andare in entrambe le direzioni -> Mostra entrambe */
+.scroll-indicator.middle .scroll-line::before { opacity: 1; }
+.scroll-indicator.middle .scroll-line::after  { opacity: 1; }
+
+/* STATO 3: BOTTOM (Siamo in fondo alla pagina) */
+/* Vogliamo salire -> Mostra freccia su, Nascondi freccia giù */
+.scroll-indicator.bottom .scroll-line::before { opacity: 1; }
+.scroll-indicator.bottom .scroll-line::after  { opacity: 0; }
+
+@media (max-width: 1024px) {
+    .scroll-indicator { display: none; }
+}
+
+.scroll-line {
+    width: 1px;
+    height: 100px;
+    background: var(--border-color);
+    position: relative;
+}
+
+.scroll-line::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid var(--primary-color);
+    border-top: 1px solid var(--primary-color);
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.scroll-line::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.scroll-indicator.middle .scroll-line::before,
+.scroll-indicator.bottom .scroll-line::before {
+    opacity: 1;
+}
+
+.scroll-indicator.bottom .scroll-line::after {
+    opacity: 0;
+}
+
+.scroll-indicator.top .scroll-line::before {
+    opacity: 0;
+}
+
+.scroll-indicator.top .scroll-line::after {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .scroll-indicator { display: none; }
+}
+
+
+main {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+section {
+    width: 100%;
+    height: auto;
+    padding: 40px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+nav {
+    display: none; /* Remove navigation as requested */
+}
+
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-family: var(--font-technical);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: var(--primary-color);
+    background: #fdf2f2;
+}
+
+/* --- Compact Content Styling --- */
+.section-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header h2 {
+    font-family: var(--font-technical);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+}
+
+.section-header::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+#hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+#hero .subtitle {
+    font-family: var(--font-technical);
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.card {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--primary-color);
+}
+
+.card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: var(--text-main);
+}
+
+.role {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+.card p, .card .meta {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.meta {
+    color: var(--primary-color) !important;
+    font-family: var(--font-technical);
+    font-weight: bold;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tags span {
+    font-family: var(--font-technical);
+    font-size: 0.7rem;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 2px;
+}
+
+.btn {
+    display: inline-block;
+    font-family: var(--font-technical);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    background: var(--text-main);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 2px;
+    margin-top: 20px;
+    transition: var(--transition);
+    
+    /* --- AGGIUNTE DI SICUREZZA --- */
+    cursor: pointer;       /* Forza la manina del mouse */
+    position: relative;    /* Necessario per z-index */
+    z-index: 10;           /* Assicura che stia sopra ad altri elementi */
+}
+
+.btn:hover {
+    background: var(--primary-color);
+}
+
+.btn:hover {
+    background: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    nav ul { gap: 5px; }
+    nav ul li a { padding: 8px 10px; font-size: 0.65rem; }
+    #hero h1 { font-size: 1.8rem; }
+    section { width: 92%; }
+}
+
+/* Rimuove i bordi e stili di default del bottone per farlo sembrare il link di prima */
+button.btn {
+    border: none;
+    outline: none;
+    font-family: var(--font-technical); /* Assicura che erediti il font giusto */
+    cursor: pointer;
+}
+
+/* Classe che aggiungeremo con JS quando la copia ha successo */
+.btn.success {
+    background-color: #2ecc71 !important; /* Un bel verde smeraldo */
+    color: white;
+    content: "COPIED!"; /* Solo indicativo, il testo lo cambiamo via JS */
+}
