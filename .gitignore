@@ -1,1 +1,9 @@
-Input.yamlOutput.pdfUtility.venv
+# Ignora tutti i file PDF
+*.pdf
+
+# Ignora tutti i file YAML (copriamo entrambe le estensioni comuni)
+*.yaml
+*.yml
+
+# Ignora l'intera cartella dell'ambiente virtuale
+.venv/
