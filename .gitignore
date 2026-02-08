@@ -1,9 +1,9 @@
-# Ignora tutti i file PDF
+# Ignore PDF files
 *.pdf
 
-# Ignora tutti i file YAML (copriamo entrambe le estensioni comuni)
+# Ignore YAML files
 *.yaml
 *.yml
 
-# Ignora l'intera cartella dell'ambiente virtuale
+# Ignore venv virtual environment directory
 .venv/
