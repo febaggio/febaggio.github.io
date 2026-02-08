@@ -52,6 +52,9 @@ nav, .scroll-indicator, .btn, #emailBtn { display: none !important; }
 #hero {
     text-align: center;
     margin-bottom: 50px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 #hero h1 {
@@ -72,8 +75,6 @@ nav, .scroll-indicator, .btn, #emailBtn { display: none !important; }
     line-height: 1.6;
     color: var(--text-grey);
     max-width: 500px;
-    margin-left: auto !important;
-    margin-right: auto !important;
 }
 
 /* 6. SECTION HEADERS */
