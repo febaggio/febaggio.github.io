@@ -71,6 +71,9 @@ nav, .scroll-indicator, .btn, #emailBtn { display: none !important; }
     font-size: 10pt;
     line-height: 1.6;
     color: var(--text-grey);
+    max-width: 500px;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 /* 6. SECTION HEADERS */
