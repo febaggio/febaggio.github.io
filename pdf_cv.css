@@ -51,5 +51,89 @@ nav, .scroll-indicator, .btn, #emailBtn { display: none !important; }
 /* 5. HERO / HEADER */
 #hero {
     text-align: center;
-    margin-bottom: 40px !important;
+    margin-bottom: 50px !important;
+}
+
+#hero h1 {
+    font-size: 22pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#hero .subtitle {
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+#hero p {
+    font-size: 10pt;
+    line-height: 1.6;
+    color: var(--text-grey);
+}
+
+/* 6. SECTION HEADERS */
+.section-header {
+    margin-top: 45px !important;
+    margin-bottom: 18px !important;
+}
+
+.section-header h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-black);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+}
+
+/* 7. CARDS */
+.card {
+    margin-bottom: 20px !important;
+}
+
+.card .meta {
+    font-size: 9pt;
+    font-weight: 300;
+    color: var(--text-grey);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.card h3 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.card .role {
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 6px;
+}
+
+.card p {
+    font-size: 10pt;
+    line-height: 1.6;
+    color: var(--text-grey);
+}
+
+/* 8. TAGS (Skills) */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tags span {
+    font-size: 9pt;
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 2px;
+    color: var(--text-dark);
 }
