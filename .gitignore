@@ -1,0 +1,13 @@
+# Python virtual environment
+.venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+
+# Machine-local Claude Code permissions
+.claude/settings.local.json

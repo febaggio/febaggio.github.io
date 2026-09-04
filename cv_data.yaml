@@ -1,0 +1,56 @@
+info:
+  name: "FEDERICO BAGGIO"
+  subtitle: "MECHATRONICS ENGINEER_"
+  bio: "Automation Software Developer - Tech enthusiast - DIY lover"
+  email: "federicobaggio4@gmail.com"
+  linkedin: "https://www.linkedin.com/in/federicobaggio/"
+
+skills:
+  - category: "AUTOMATION"
+    tags: ["TIA Portal", "TwinCAT 3"]
+  - category: "PROGRAMMING"
+    tags: ["Python", "C/C++", "Matlab", "Wolfram", "Ruby", "LaTeX"]
+  - category: "ENGINEERING TOOLS"
+    tags: ["Fusion 360", "LTspice", "Eagle", "MapleSim"]
+
+education:
+  - date: "MAY 2022"
+    degree: "M.SC. IN MECHATRONICS ENGINEERING"
+    school: "University of Trento"
+    desc: "Electronics and Robotics: 108/110."
+  - date: "NOV 2019"
+    degree: "B.SC. IN INDUSTRIAL ENGINEERING"
+    school: "University of Trento"
+    desc: "Mechatronics: 105/110."
+
+experience:
+  - date: "MARCH 2024 - PRESENT"
+    company: "STEVANATO GROUP"
+    role: "Automation Software Developer"
+    desc: "Development of logic and graphical interfaces in Siemens environment for pharmaceutical glass container handling and packaging lines."
+  - date: "AUGUST 2022 - MARCH 2024"
+    company: "SIPA"
+    role: "Software Developer"
+    desc: "Development of Beckhoff PLC software (TwinCAT 3) and HMI for plastic container production machinery."
+
+projects:
+  - meta: "MASTER'S THESIS"
+    title: "CYBERSECURITY IN INDUSTRIAL DEVICES"
+    desc: "Developed in collaboration with Eliwell by Schneider Electric. Focused on the secure design and development of industrial devices."
+  - meta: "NETWORKING"
+    title: "TRAP PROTOCOL SIMULATOR"
+    desc: "Python software to simulate the energy performance of network nodes communicating with or without the TRAP protocol and Backscatter communication."
+  - meta: "ELECTRONICS"
+    title: "VISIBLE LIGHT COMMUNICATION"
+    desc: "Hardware and software design of a prototype to test VLC with a battery-less receiver and energy harvesting capabilities."
+
+extra:
+  - meta: "LEADERSHIP"
+    title: "DIOCESAN SECRETARY (MSAC)"
+    desc: "Coordinated student movements and activities between 2017 and 2020. Parish and diocesan youth leader since 2015."
+  - meta: "SPORTS"
+    title: "BASKETBALL COACH & PLAYER"
+    desc: "Basketball player since 2005. Certified Minibasket coach with experience training youth teams."
+  - meta: "INNOVATION"
+    title: "JETN & RURALHACK"
+    desc: "Participated in business games and workshops on Arduino and Telegram bots for agricultural instrumentation management."
