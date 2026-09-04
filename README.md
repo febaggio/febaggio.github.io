@@ -31,8 +31,23 @@ committed, because GitHub Pages serves them directly.
 
 ## Editing the CV
 
-Change `cv_data.yaml` and re-run `python build.py`. Never edit `index.html` by
-hand — it is generated output and will be overwritten.
+Change `cv_data.yaml`, bump its `info.updated` date, and re-run
+`python build.py`. Never edit `index.html` by hand — it is generated output and
+will be overwritten.
+
+The build is reproducible: the same `cv_data.yaml` always produces a
+byte-identical PDF, so `git status` stays clean unless the CV actually changed.
+That is what `info.updated` is for — it is the date stamped into the PDF, and
+pinning it keeps the embedded fonts from carrying a fresh timestamp each run.
+
+### Social preview image
+
+`og-image.png` is the card shown when the site is shared. It is generated
+separately, since it only changes when the name or tagline does:
+
+```bash
+python make_og_image.py
+```
 
 ## Files
 
@@ -44,5 +59,7 @@ hand — it is generated output and will be overwritten.
 | `style.css` | Web styling |
 | `pdf_cv.css` | Print styling for the PDF |
 | `script.js` | Scroll indicator + copy-email button |
+| `make_og_image.py` | Generates `og-image.png`, run manually |
 | `index.html` | **Generated** — the published page |
 | `federico_baggio_cv.pdf` | **Generated** — the downloadable CV |
+| `og-image.png` | **Generated** — social link preview |

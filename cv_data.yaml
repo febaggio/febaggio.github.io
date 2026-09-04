@@ -1,9 +1,14 @@
 info:
+  # Date the CV content was last revised. Bump it when you change
+  # anything below; it is the date stamped into the generated PDF and it
+  # keeps the build reproducible.
+  updated: "2026-09-04"
   name: "FEDERICO BAGGIO"
   subtitle: "MECHATRONICS ENGINEER_"
   bio: "Automation Software Developer - Tech enthusiast - DIY lover"
   email: "federicobaggio4@gmail.com"
   linkedin: "https://www.linkedin.com/in/federicobaggio/"
+  site_url: "https://febaggio.github.io"
 
 skills:
   - category: "AUTOMATION"

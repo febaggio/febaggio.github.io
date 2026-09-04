@@ -1,6 +1,30 @@
+import os
+from datetime import datetime, timezone
+
 import yaml
 from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML, CSS
+
+# Fixed document id: WeasyPrint would otherwise put a random one in every
+# file, which alone would make the output differ between builds.
+PDF_IDENTIFIER = b'febaggio-cv'
+
+
+def _set_build_date(updated):
+    """
+    Pin every timestamp the PDF contains to the CV's own "updated" date.
+
+    The PDF is committed to the repo, so it must be byte-for-byte
+    reproducible: otherwise each build shows up as a diff even when the CV
+    has not changed. The bytes that used to vary were timestamps fontTools
+    writes into the subsetted fonts, and it honours SOURCE_DATE_EPOCH.
+
+    This has to run before WeasyPrint is imported, since importing it pulls
+    in the font machinery.
+    """
+    date = datetime.strptime(updated, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+    os.environ['SOURCE_DATE_EPOCH'] = str(int(date.timestamp()))
+    return date.strftime('%Y-%m-%d')
+
 
 def build_cv():
     """
@@ -23,6 +47,16 @@ def build_cv():
         print(f"[ERROR] Error parsing YAML file: {exc}")
         return
 
+    try:
+        build_date = _set_build_date(data['info']['updated'])
+    except (KeyError, ValueError):
+        print("[ERROR] cv_data.yaml needs an info.updated date in YYYY-MM-DD form.")
+        return
+
+    # Imported only now: it must not load the font machinery before
+    # _set_build_date has put SOURCE_DATE_EPOCH in the environment.
+    from weasyprint import HTML, CSS
+
     # ---------------------------------------------------------
     # 2. Render HTML Template
     # ---------------------------------------------------------
@@ -31,8 +65,9 @@ def build_cv():
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template('template.html')
         
-        # Render the template with the data loaded from YAML
-        html_output = template.render(data)
+        # Render the template with the data loaded from YAML.
+        # build_date feeds the dcterms meta tags the PDF takes its dates from.
+        html_output = template.render(build_date=build_date, **data)
     except Exception as e:
         print(f"[ERROR] Template rendering failed: {e}")
         return
@@ -57,7 +92,8 @@ def build_cv():
 
         HTML(string=html_output, base_url='.').write_pdf(
             'federico_baggio_cv.pdf',
-            stylesheets=[pdf_css] 
+            stylesheets=[pdf_css],
+            pdf_identifier=PDF_IDENTIFIER,
         )
         print("[INFO] PDF generated: federico_baggio_cv.pdf")
         
