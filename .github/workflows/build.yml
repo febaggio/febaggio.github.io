@@ -1,0 +1,64 @@
+# Rebuilds index.html and the PDF whenever the CV sources change, and commits
+# the result. GitHub Pages then serves the refreshed files from the branch, so
+# editing cv_data.yaml is enough -- no need to run build.py locally.
+name: Build CV
+
+on:
+  push:
+    branches: [main]
+    # Only the inputs. The generated files are deliberately absent, so the
+    # commit this workflow makes cannot trigger another run.
+    paths:
+      - cv_data.yaml
+      - template.html
+      - style.css
+      - pdf_cv.css
+      - script.js
+      - build.py
+      - requirements.txt
+      - .github/workflows/build.yml
+  workflow_dispatch:
+
+# Two pushes in a row should not race each other into conflicting commits.
+concurrency:
+  group: build-cv
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      # WeasyPrint renders text through Pango, which is not preinstalled.
+      - name: Install system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b libffi8
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build
+        run: python build.py
+
+      - name: Commit the regenerated files
+        run: |
+          if git diff --quiet -- index.html federico_baggio_cv.pdf; then
+            echo "Output unchanged, nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html federico_baggio_cv.pdf
+          git commit -m "Rebuild site and PDF from ${GITHUB_SHA:0:7}"
+          git push

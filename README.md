@@ -49,6 +49,20 @@ separately, since it only changes when the name or tagline does:
 python make_og_image.py
 ```
 
+## Automatic builds
+
+Pushing a change to `cv_data.yaml` (or to the template, the stylesheets or
+`build.py`) triggers `.github/workflows/build.yml`, which rebuilds `index.html`
+and the PDF and commits them back. So editing the YAML on GitHub directly is
+enough to update the site.
+
+The workflow only watches the input files, never the generated ones, so its own
+commit cannot trigger another run. It commits only when the output actually
+changed, which is what the reproducible build buys us.
+
+Building locally still works exactly the same; just push the regenerated files
+along with the sources and the workflow will find nothing to do.
+
 ## Files
 
 | File | Role |
@@ -63,3 +77,4 @@ python make_og_image.py
 | `index.html` | **Generated** — the published page |
 | `federico_baggio_cv.pdf` | **Generated** — the downloadable CV |
 | `og-image.png` | **Generated** — social link preview |
+| `.github/workflows/build.yml` | Rebuilds and commits the output on push |
